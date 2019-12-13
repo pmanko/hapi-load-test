@@ -1,0 +1,1898 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.2.1">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="HAPI FHIR" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group" enabled="false">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </ThreadGroup>
+      <hashTree/>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Create &amp; Delete" enabled="false">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">3</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">3</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">70</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">false</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+          <stringProp name="filename">C:/dev/testing/testvars.csv</stringProp>
+          <stringProp name="fileEncoding"></stringProp>
+          <stringProp name="variableNames">json_file,id,firstname,lastname</stringProp>
+          <boolProp name="ignoreFirstLine">true</boolProp>
+          <stringProp name="delimiter">,</stringProp>
+          <boolProp name="quotedData">true</boolProp>
+          <boolProp name="recycle">true</boolProp>
+          <boolProp name="stopThread">false</boolProp>
+          <stringProp name="shareMode">shareMode.all</stringProp>
+        </CSVDataSet>
+        <hashTree/>
+        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+          <collectionProp name="HeaderManager.headers">
+            <elementProp name="" elementType="Header">
+              <stringProp name="Header.name">Content-Type</stringProp>
+              <stringProp name="Header.value">application/fhir+json</stringProp>
+            </elementProp>
+          </collectionProp>
+        </HeaderManager>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Institution - Azure" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path"></stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+  &quot;resourceType&quot;: &quot;Bundle&quot;,&#xd;
+  &quot;type&quot;: &quot;transaction&quot;,&#xd;
+  &quot;entry&quot;: [&#xd;
+    {&#xd;
+      &quot;fullUrl&quot;: &quot;urn:uuid:4810444f-d762-4f40-8bae-8bfb7b12a9bb&quot;,&#xd;
+      &quot;resource&quot;: {&#xd;
+        &quot;resourceType&quot;: &quot;Location&quot;,&#xd;
+        &quot;id&quot;: &quot;4810444f-d762-4f40-8bae-8bfb7b12a9bb&quot;,&#xd;
+        &quot;meta&quot;: {&#xd;
+          &quot;profile&quot;: [&#xd;
+            &quot;http://hl7.org/fhir/us/core/StructureDefinition/us-core-location&quot;&#xd;
+          ]&#xd;
+        },&#xd;
+        &quot;status&quot;: &quot;active&quot;,&#xd;
+        &quot;name&quot;: &quot;SAINT ANNE&apos;S HOSPITAL&quot;,&#xd;
+        &quot;telecom&quot;: [&#xd;
+          {&#xd;
+            &quot;system&quot;: &quot;phone&quot;,&#xd;
+            &quot;value&quot;: &quot;5086745600&quot;&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;address&quot;: {&#xd;
+          &quot;line&quot;: [&#xd;
+            &quot;795 MIDDLE STREET&quot;&#xd;
+          ],&#xd;
+          &quot;city&quot;: &quot;FALL RIVER&quot;,&#xd;
+          &quot;state&quot;: &quot;MA&quot;,&#xd;
+          &quot;postalCode&quot;: &quot;02721&quot;,&#xd;
+          &quot;country&quot;: &quot;US&quot;&#xd;
+        },&#xd;
+        &quot;position&quot;: {&#xd;
+          &quot;longitude&quot;: -71.094162,&#xd;
+          &quot;latitude&quot;: 41.725351&#xd;
+        },&#xd;
+        &quot;managingOrganization&quot;: {&#xd;
+          &quot;reference&quot;: &quot;urn:uuid:ecc51621-0af3-3b35-ac3e-8b1e34022e92&quot;,&#xd;
+          &quot;display&quot;: &quot;SAINT ANNE&apos;S HOSPITAL&quot;&#xd;
+        }&#xd;
+      },&#xd;
+      &quot;request&quot;: {&#xd;
+        &quot;method&quot;: &quot;POST&quot;,&#xd;
+        &quot;url&quot;: &quot;Location&quot;&#xd;
+      }&#xd;
+    },&#xd;
+    {&#xd;
+      &quot;fullUrl&quot;: &quot;urn:uuid:ecc51621-0af3-3b35-ac3e-8b1e34022e92&quot;,&#xd;
+      &quot;resource&quot;: {&#xd;
+        &quot;resourceType&quot;: &quot;Organization&quot;,&#xd;
+        &quot;id&quot;: &quot;ecc51621-0af3-3b35-ac3e-8b1e34022e92&quot;,&#xd;
+        &quot;meta&quot;: {&#xd;
+          &quot;profile&quot;: [&#xd;
+            &quot;http://hl7.org/fhir/us/core/StructureDefinition/us-core-organization&quot;&#xd;
+          ]&#xd;
+        },&#xd;
+        &quot;extension&quot;: [&#xd;
+          {&#xd;
+            &quot;url&quot;: &quot;http://synthetichealth.github.io/synthea/utilization-encounters-extension&quot;,&#xd;
+            &quot;valueInteger&quot;: 24&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;url&quot;: &quot;http://synthetichealth.github.io/synthea/utilization-procedures-extension&quot;,&#xd;
+            &quot;valueInteger&quot;: 0&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;url&quot;: &quot;http://synthetichealth.github.io/synthea/utilization-labs-extension&quot;,&#xd;
+            &quot;valueInteger&quot;: 0&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;url&quot;: &quot;http://synthetichealth.github.io/synthea/utilization-prescriptions-extension&quot;,&#xd;
+            &quot;valueInteger&quot;: 0&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;identifier&quot;: [&#xd;
+          {&#xd;
+            &quot;system&quot;: &quot;https://github.com/synthetichealth/synthea&quot;,&#xd;
+            &quot;value&quot;: &quot;ecc51621-0af3-3b35-ac3e-8b1e34022e92&quot;&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;active&quot;: true,&#xd;
+        &quot;type&quot;: [&#xd;
+          {&#xd;
+            &quot;coding&quot;: [&#xd;
+              {&#xd;
+                &quot;system&quot;: &quot;http://terminology.hl7.org/CodeSystem/organization-type&quot;,&#xd;
+                &quot;code&quot;: &quot;prov&quot;,&#xd;
+                &quot;display&quot;: &quot;Healthcare Provider&quot;&#xd;
+              }&#xd;
+            ],&#xd;
+            &quot;text&quot;: &quot;Healthcare Provider&quot;&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;name&quot;: &quot;SAINT ANNE&apos;S HOSPITAL&quot;,&#xd;
+        &quot;telecom&quot;: [&#xd;
+          {&#xd;
+            &quot;system&quot;: &quot;phone&quot;,&#xd;
+            &quot;value&quot;: &quot;5086745600&quot;&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;address&quot;: [&#xd;
+          {&#xd;
+            &quot;line&quot;: [&#xd;
+              &quot;795 MIDDLE STREET&quot;&#xd;
+            ],&#xd;
+            &quot;city&quot;: &quot;FALL RIVER&quot;,&#xd;
+            &quot;state&quot;: &quot;MA&quot;,&#xd;
+            &quot;postalCode&quot;: &quot;02721&quot;,&#xd;
+            &quot;country&quot;: &quot;US&quot;&#xd;
+          }&#xd;
+        ]&#xd;
+      },&#xd;
+      &quot;request&quot;: {&#xd;
+        &quot;method&quot;: &quot;POST&quot;,&#xd;
+        &quot;url&quot;: &quot;Organization&quot;&#xd;
+      }&#xd;
+    },&#xd;
+    {&#xd;
+      &quot;fullUrl&quot;: &quot;urn:uuid:9fbf2fb4-b406-43ca-bbe6-c66dedfba9c1&quot;,&#xd;
+      &quot;resource&quot;: {&#xd;
+        &quot;resourceType&quot;: &quot;Location&quot;,&#xd;
+        &quot;id&quot;: &quot;9fbf2fb4-b406-43ca-bbe6-c66dedfba9c1&quot;,&#xd;
+        &quot;meta&quot;: {&#xd;
+          &quot;profile&quot;: [&#xd;
+            &quot;http://hl7.org/fhir/us/core/StructureDefinition/us-core-location&quot;&#xd;
+          ]&#xd;
+        },&#xd;
+        &quot;status&quot;: &quot;active&quot;,&#xd;
+        &quot;name&quot;: &quot;SOUTHCOAST HOSPITAL GROUP, INC&quot;,&#xd;
+        &quot;telecom&quot;: [&#xd;
+          {&#xd;
+            &quot;system&quot;: &quot;phone&quot;,&#xd;
+            &quot;value&quot;: &quot;5086793131&quot;&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;address&quot;: {&#xd;
+          &quot;line&quot;: [&#xd;
+            &quot;363 HIGHLAND AVENUE&quot;&#xd;
+          ],&#xd;
+          &quot;city&quot;: &quot;FALL RIVER&quot;,&#xd;
+          &quot;state&quot;: &quot;MA&quot;,&#xd;
+          &quot;postalCode&quot;: &quot;02720&quot;,&#xd;
+          &quot;country&quot;: &quot;US&quot;&#xd;
+        },&#xd;
+        &quot;position&quot;: {&#xd;
+          &quot;longitude&quot;: -71.094162,&#xd;
+          &quot;latitude&quot;: 41.725351&#xd;
+        },&#xd;
+        &quot;managingOrganization&quot;: {&#xd;
+          &quot;reference&quot;: &quot;urn:uuid:23834663-ed53-3da9-b330-d6e1ecb8428e&quot;,&#xd;
+          &quot;display&quot;: &quot;SOUTHCOAST HOSPITAL GROUP, INC&quot;&#xd;
+        }&#xd;
+      },&#xd;
+      &quot;request&quot;: {&#xd;
+        &quot;method&quot;: &quot;POST&quot;,&#xd;
+        &quot;url&quot;: &quot;Location&quot;&#xd;
+      }&#xd;
+    },&#xd;
+    {&#xd;
+      &quot;fullUrl&quot;: &quot;urn:uuid:23834663-ed53-3da9-b330-d6e1ecb8428e&quot;,&#xd;
+      &quot;resource&quot;: {&#xd;
+        &quot;resourceType&quot;: &quot;Organization&quot;,&#xd;
+        &quot;id&quot;: &quot;23834663-ed53-3da9-b330-d6e1ecb8428e&quot;,&#xd;
+        &quot;meta&quot;: {&#xd;
+          &quot;profile&quot;: [&#xd;
+            &quot;http://hl7.org/fhir/us/core/StructureDefinition/us-core-organization&quot;&#xd;
+          ]&#xd;
+        },&#xd;
+        &quot;extension&quot;: [&#xd;
+          {&#xd;
+            &quot;url&quot;: &quot;http://synthetichealth.github.io/synthea/utilization-encounters-extension&quot;,&#xd;
+            &quot;valueInteger&quot;: 38&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;url&quot;: &quot;http://synthetichealth.github.io/synthea/utilization-procedures-extension&quot;,&#xd;
+            &quot;valueInteger&quot;: 0&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;url&quot;: &quot;http://synthetichealth.github.io/synthea/utilization-labs-extension&quot;,&#xd;
+            &quot;valueInteger&quot;: 0&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;url&quot;: &quot;http://synthetichealth.github.io/synthea/utilization-prescriptions-extension&quot;,&#xd;
+            &quot;valueInteger&quot;: 0&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;identifier&quot;: [&#xd;
+          {&#xd;
+            &quot;system&quot;: &quot;https://github.com/synthetichealth/synthea&quot;,&#xd;
+            &quot;value&quot;: &quot;23834663-ed53-3da9-b330-d6e1ecb8428e&quot;&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;active&quot;: true,&#xd;
+        &quot;type&quot;: [&#xd;
+          {&#xd;
+            &quot;coding&quot;: [&#xd;
+              {&#xd;
+                &quot;system&quot;: &quot;http://terminology.hl7.org/CodeSystem/organization-type&quot;,&#xd;
+                &quot;code&quot;: &quot;prov&quot;,&#xd;
+                &quot;display&quot;: &quot;Healthcare Provider&quot;&#xd;
+              }&#xd;
+            ],&#xd;
+            &quot;text&quot;: &quot;Healthcare Provider&quot;&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;name&quot;: &quot;SOUTHCOAST HOSPITAL GROUP, INC&quot;,&#xd;
+        &quot;telecom&quot;: [&#xd;
+          {&#xd;
+            &quot;system&quot;: &quot;phone&quot;,&#xd;
+            &quot;value&quot;: &quot;5086793131&quot;&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;address&quot;: [&#xd;
+          {&#xd;
+            &quot;line&quot;: [&#xd;
+              &quot;363 HIGHLAND AVENUE&quot;&#xd;
+            ],&#xd;
+            &quot;city&quot;: &quot;FALL RIVER&quot;,&#xd;
+            &quot;state&quot;: &quot;MA&quot;,&#xd;
+            &quot;postalCode&quot;: &quot;02720&quot;,&#xd;
+            &quot;country&quot;: &quot;US&quot;&#xd;
+          }&#xd;
+        ]&#xd;
+      },&#xd;
+      &quot;request&quot;: {&#xd;
+        &quot;method&quot;: &quot;POST&quot;,&#xd;
+        &quot;url&quot;: &quot;Organization&quot;&#xd;
+      }&#xd;
+    },&#xd;
+    {&#xd;
+      &quot;fullUrl&quot;: &quot;urn:uuid:f1821d7e-7da2-48d7-9f48-ad8a7d97fb36&quot;,&#xd;
+      &quot;resource&quot;: {&#xd;
+        &quot;resourceType&quot;: &quot;Location&quot;,&#xd;
+        &quot;id&quot;: &quot;f1821d7e-7da2-48d7-9f48-ad8a7d97fb36&quot;,&#xd;
+        &quot;meta&quot;: {&#xd;
+          &quot;profile&quot;: [&#xd;
+            &quot;http://hl7.org/fhir/us/core/StructureDefinition/us-core-location&quot;&#xd;
+          ]&#xd;
+        },&#xd;
+        &quot;status&quot;: &quot;active&quot;,&#xd;
+        &quot;name&quot;: &quot;OLIVIER GROUP PC&quot;,&#xd;
+        &quot;telecom&quot;: [&#xd;
+          {&#xd;
+            &quot;system&quot;: &quot;phone&quot;,&#xd;
+            &quot;value&quot;: &quot;508-993-3000&quot;&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;address&quot;: {&#xd;
+          &quot;line&quot;: [&#xd;
+            &quot;92 FAUNCE CORNER RD&quot;&#xd;
+          ],&#xd;
+          &quot;city&quot;: &quot;DARTMOUTH&quot;,&#xd;
+          &quot;state&quot;: &quot;MA&quot;,&#xd;
+          &quot;postalCode&quot;: &quot;02747-1262&quot;,&#xd;
+          &quot;country&quot;: &quot;US&quot;&#xd;
+        },&#xd;
+        &quot;position&quot;: {&#xd;
+          &quot;longitude&quot;: -70.958229,&#xd;
+          &quot;latitude&quot;: 41.56651&#xd;
+        },&#xd;
+        &quot;managingOrganization&quot;: {&#xd;
+          &quot;reference&quot;: &quot;urn:uuid:8979fc79-bab8-34ba-b7a5-016443c958c5&quot;,&#xd;
+          &quot;display&quot;: &quot;OLIVIER GROUP PC&quot;&#xd;
+        }&#xd;
+      },&#xd;
+      &quot;request&quot;: {&#xd;
+        &quot;method&quot;: &quot;POST&quot;,&#xd;
+        &quot;url&quot;: &quot;Location&quot;&#xd;
+      }&#xd;
+    },&#xd;
+    {&#xd;
+      &quot;fullUrl&quot;: &quot;urn:uuid:8979fc79-bab8-34ba-b7a5-016443c958c5&quot;,&#xd;
+      &quot;resource&quot;: {&#xd;
+        &quot;resourceType&quot;: &quot;Organization&quot;,&#xd;
+        &quot;id&quot;: &quot;8979fc79-bab8-34ba-b7a5-016443c958c5&quot;,&#xd;
+        &quot;meta&quot;: {&#xd;
+          &quot;profile&quot;: [&#xd;
+            &quot;http://hl7.org/fhir/us/core/StructureDefinition/us-core-organization&quot;&#xd;
+          ]&#xd;
+        },&#xd;
+        &quot;extension&quot;: [&#xd;
+          {&#xd;
+            &quot;url&quot;: &quot;http://synthetichealth.github.io/synthea/utilization-encounters-extension&quot;,&#xd;
+            &quot;valueInteger&quot;: 35&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;url&quot;: &quot;http://synthetichealth.github.io/synthea/utilization-procedures-extension&quot;,&#xd;
+            &quot;valueInteger&quot;: 146&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;url&quot;: &quot;http://synthetichealth.github.io/synthea/utilization-labs-extension&quot;,&#xd;
+            &quot;valueInteger&quot;: 12&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;url&quot;: &quot;http://synthetichealth.github.io/synthea/utilization-prescriptions-extension&quot;,&#xd;
+            &quot;valueInteger&quot;: 19&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;identifier&quot;: [&#xd;
+          {&#xd;
+            &quot;system&quot;: &quot;https://github.com/synthetichealth/synthea&quot;,&#xd;
+            &quot;value&quot;: &quot;8979fc79-bab8-34ba-b7a5-016443c958c5&quot;&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;active&quot;: true,&#xd;
+        &quot;type&quot;: [&#xd;
+          {&#xd;
+            &quot;coding&quot;: [&#xd;
+              {&#xd;
+                &quot;system&quot;: &quot;http://terminology.hl7.org/CodeSystem/organization-type&quot;,&#xd;
+                &quot;code&quot;: &quot;prov&quot;,&#xd;
+                &quot;display&quot;: &quot;Healthcare Provider&quot;&#xd;
+              }&#xd;
+            ],&#xd;
+            &quot;text&quot;: &quot;Healthcare Provider&quot;&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;name&quot;: &quot;OLIVIER GROUP PC&quot;,&#xd;
+        &quot;telecom&quot;: [&#xd;
+          {&#xd;
+            &quot;system&quot;: &quot;phone&quot;,&#xd;
+            &quot;value&quot;: &quot;508-993-3000&quot;&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;address&quot;: [&#xd;
+          {&#xd;
+            &quot;line&quot;: [&#xd;
+              &quot;92 FAUNCE CORNER RD&quot;&#xd;
+            ],&#xd;
+            &quot;city&quot;: &quot;DARTMOUTH&quot;,&#xd;
+            &quot;state&quot;: &quot;MA&quot;,&#xd;
+            &quot;postalCode&quot;: &quot;02747-1262&quot;,&#xd;
+            &quot;country&quot;: &quot;US&quot;&#xd;
+          }&#xd;
+        ]&#xd;
+      },&#xd;
+      &quot;request&quot;: {&#xd;
+        &quot;method&quot;: &quot;POST&quot;,&#xd;
+        &quot;url&quot;: &quot;Organization&quot;&#xd;
+      }&#xd;
+    }&#xd;
+  ]&#xd;
+}&#xd;
+</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">hapi-synthea.azurewebsites.net</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">http</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/hapi-fhir-jpaserver/fhir</stringProp>
+            <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </ConfigTestElement>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Practitioner - Azure" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path"></stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+  &quot;resourceType&quot;: &quot;Bundle&quot;,&#xd;
+  &quot;type&quot;: &quot;transaction&quot;,&#xd;
+  &quot;entry&quot;: [&#xd;
+    {&#xd;
+      &quot;fullUrl&quot;: &quot;urn:uuid:0000016e-ed71-bd01-0000-000000000064&quot;,&#xd;
+      &quot;resource&quot;: {&#xd;
+        &quot;resourceType&quot;: &quot;Practitioner&quot;,&#xd;
+        &quot;id&quot;: &quot;0000016e-ed71-bd01-0000-000000000064&quot;,&#xd;
+        &quot;meta&quot;: {&#xd;
+          &quot;profile&quot;: [&#xd;
+            &quot;http://hl7.org/fhir/us/core/StructureDefinition/us-core-practitioner&quot;&#xd;
+          ]&#xd;
+        },&#xd;
+        &quot;extension&quot;: [&#xd;
+          {&#xd;
+            &quot;url&quot;: &quot;http://synthetichealth.github.io/synthea/utilization-encounters-extension&quot;,&#xd;
+            &quot;valueInteger&quot;: 24&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;identifier&quot;: [&#xd;
+          {&#xd;
+            &quot;system&quot;: &quot;http://hl7.org/fhir/sid/us-npi&quot;,&#xd;
+            &quot;value&quot;: &quot;100&quot;&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;active&quot;: true,&#xd;
+        &quot;name&quot;: [&#xd;
+          {&#xd;
+            &quot;family&quot;: &quot;Conn188&quot;,&#xd;
+            &quot;given&quot;: [&#xd;
+              &quot;Whitney250&quot;&#xd;
+            ],&#xd;
+            &quot;prefix&quot;: [&#xd;
+              &quot;Dr.&quot;&#xd;
+            ]&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;telecom&quot;: [&#xd;
+          {&#xd;
+            &quot;extension&quot;: [&#xd;
+              {&#xd;
+                &quot;url&quot;: &quot;http://hl7.org/fhir/us/core/StructureDefinition/us-core-direct&quot;,&#xd;
+                &quot;valueBoolean&quot;: true&#xd;
+              }&#xd;
+            ],&#xd;
+            &quot;system&quot;: &quot;email&quot;,&#xd;
+            &quot;value&quot;: &quot;Whitney250.Conn188@example.com&quot;,&#xd;
+            &quot;use&quot;: &quot;work&quot;&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;address&quot;: [&#xd;
+          {&#xd;
+            &quot;line&quot;: [&#xd;
+              &quot;795 MIDDLE STREET&quot;&#xd;
+            ],&#xd;
+            &quot;city&quot;: &quot;FALL RIVER&quot;,&#xd;
+            &quot;state&quot;: &quot;MA&quot;,&#xd;
+            &quot;postalCode&quot;: &quot;02721&quot;,&#xd;
+            &quot;country&quot;: &quot;US&quot;&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;gender&quot;: &quot;male&quot;&#xd;
+      },&#xd;
+      &quot;request&quot;: {&#xd;
+        &quot;method&quot;: &quot;POST&quot;,&#xd;
+        &quot;url&quot;: &quot;Practitioner&quot;&#xd;
+      }&#xd;
+    }&#xd;
+  ]&#xd;
+}&#xd;
+</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">hapi-synthea.azurewebsites.net</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">http</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/hapi-fhir-jpaserver/fhir</stringProp>
+            <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </ConfigTestElement>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Patient - Azure" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">&#xd;
+</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path"></stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">${__FileToString(${__eval(${json_file})},,)}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">hapi-synthea.azurewebsites.net</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">http</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/hapi-fhir-jpaserver/fhir</stringProp>
+            <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </ConfigTestElement>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Delete Patient - Azure" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="identifier" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">${id}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">identifier</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">hapi-synthea.azurewebsites.net</stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/hapi-fhir-jpaserver/fhir/Patient/</stringProp>
+          <stringProp name="HTTPSampler.method">DELETE</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Delete institution - Azure" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="identifier" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">ecc51621-0af3-3b35-ac3e-8b1e34022e92</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">identifier</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">hapi-synthea.azurewebsites.net</stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/hapi-fhir-jpaserver/fhir/Organization</stringProp>
+          <stringProp name="HTTPSampler.method">DELETE</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Delete Practitioner - Azure" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="identifier" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">0000016e-ed71-bd01-0000-000000000064</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">identifier</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">hapi-synthea.azurewebsites.net</stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/hapi-fhir-jpaserver/fhir/Practitioner/</stringProp>
+          <stringProp name="HTTPSampler.method">DELETE</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST institution - HAPI" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path"></stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+  &quot;resourceType&quot;: &quot;Bundle&quot;,&#xd;
+  &quot;type&quot;: &quot;transaction&quot;,&#xd;
+  &quot;entry&quot;: [&#xd;
+    {&#xd;
+      &quot;fullUrl&quot;: &quot;urn:uuid:4810444f-d762-4f40-8bae-8bfb7b12a9bb&quot;,&#xd;
+      &quot;resource&quot;: {&#xd;
+        &quot;resourceType&quot;: &quot;Location&quot;,&#xd;
+        &quot;id&quot;: &quot;4810444f-d762-4f40-8bae-8bfb7b12a9bb&quot;,&#xd;
+        &quot;meta&quot;: {&#xd;
+          &quot;profile&quot;: [&#xd;
+            &quot;http://hl7.org/fhir/us/core/StructureDefinition/us-core-location&quot;&#xd;
+          ]&#xd;
+        },&#xd;
+        &quot;status&quot;: &quot;active&quot;,&#xd;
+        &quot;name&quot;: &quot;SAINT ANNE&apos;S HOSPITAL&quot;,&#xd;
+        &quot;telecom&quot;: [&#xd;
+          {&#xd;
+            &quot;system&quot;: &quot;phone&quot;,&#xd;
+            &quot;value&quot;: &quot;5086745600&quot;&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;address&quot;: {&#xd;
+          &quot;line&quot;: [&#xd;
+            &quot;795 MIDDLE STREET&quot;&#xd;
+          ],&#xd;
+          &quot;city&quot;: &quot;FALL RIVER&quot;,&#xd;
+          &quot;state&quot;: &quot;MA&quot;,&#xd;
+          &quot;postalCode&quot;: &quot;02721&quot;,&#xd;
+          &quot;country&quot;: &quot;US&quot;&#xd;
+        },&#xd;
+        &quot;position&quot;: {&#xd;
+          &quot;longitude&quot;: -71.094162,&#xd;
+          &quot;latitude&quot;: 41.725351&#xd;
+        },&#xd;
+        &quot;managingOrganization&quot;: {&#xd;
+          &quot;reference&quot;: &quot;urn:uuid:ecc51621-0af3-3b35-ac3e-8b1e34022e92&quot;,&#xd;
+          &quot;display&quot;: &quot;SAINT ANNE&apos;S HOSPITAL&quot;&#xd;
+        }&#xd;
+      },&#xd;
+      &quot;request&quot;: {&#xd;
+        &quot;method&quot;: &quot;POST&quot;,&#xd;
+        &quot;url&quot;: &quot;Location&quot;&#xd;
+      }&#xd;
+    },&#xd;
+    {&#xd;
+      &quot;fullUrl&quot;: &quot;urn:uuid:ecc51621-0af3-3b35-ac3e-8b1e34022e92&quot;,&#xd;
+      &quot;resource&quot;: {&#xd;
+        &quot;resourceType&quot;: &quot;Organization&quot;,&#xd;
+        &quot;id&quot;: &quot;ecc51621-0af3-3b35-ac3e-8b1e34022e92&quot;,&#xd;
+        &quot;meta&quot;: {&#xd;
+          &quot;profile&quot;: [&#xd;
+            &quot;http://hl7.org/fhir/us/core/StructureDefinition/us-core-organization&quot;&#xd;
+          ]&#xd;
+        },&#xd;
+        &quot;extension&quot;: [&#xd;
+          {&#xd;
+            &quot;url&quot;: &quot;http://synthetichealth.github.io/synthea/utilization-encounters-extension&quot;,&#xd;
+            &quot;valueInteger&quot;: 24&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;url&quot;: &quot;http://synthetichealth.github.io/synthea/utilization-procedures-extension&quot;,&#xd;
+            &quot;valueInteger&quot;: 0&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;url&quot;: &quot;http://synthetichealth.github.io/synthea/utilization-labs-extension&quot;,&#xd;
+            &quot;valueInteger&quot;: 0&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;url&quot;: &quot;http://synthetichealth.github.io/synthea/utilization-prescriptions-extension&quot;,&#xd;
+            &quot;valueInteger&quot;: 0&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;identifier&quot;: [&#xd;
+          {&#xd;
+            &quot;system&quot;: &quot;https://github.com/synthetichealth/synthea&quot;,&#xd;
+            &quot;value&quot;: &quot;ecc51621-0af3-3b35-ac3e-8b1e34022e92&quot;&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;active&quot;: true,&#xd;
+        &quot;type&quot;: [&#xd;
+          {&#xd;
+            &quot;coding&quot;: [&#xd;
+              {&#xd;
+                &quot;system&quot;: &quot;http://terminology.hl7.org/CodeSystem/organization-type&quot;,&#xd;
+                &quot;code&quot;: &quot;prov&quot;,&#xd;
+                &quot;display&quot;: &quot;Healthcare Provider&quot;&#xd;
+              }&#xd;
+            ],&#xd;
+            &quot;text&quot;: &quot;Healthcare Provider&quot;&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;name&quot;: &quot;SAINT ANNE&apos;S HOSPITAL&quot;,&#xd;
+        &quot;telecom&quot;: [&#xd;
+          {&#xd;
+            &quot;system&quot;: &quot;phone&quot;,&#xd;
+            &quot;value&quot;: &quot;5086745600&quot;&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;address&quot;: [&#xd;
+          {&#xd;
+            &quot;line&quot;: [&#xd;
+              &quot;795 MIDDLE STREET&quot;&#xd;
+            ],&#xd;
+            &quot;city&quot;: &quot;FALL RIVER&quot;,&#xd;
+            &quot;state&quot;: &quot;MA&quot;,&#xd;
+            &quot;postalCode&quot;: &quot;02721&quot;,&#xd;
+            &quot;country&quot;: &quot;US&quot;&#xd;
+          }&#xd;
+        ]&#xd;
+      },&#xd;
+      &quot;request&quot;: {&#xd;
+        &quot;method&quot;: &quot;POST&quot;,&#xd;
+        &quot;url&quot;: &quot;Organization&quot;&#xd;
+      }&#xd;
+    },&#xd;
+    {&#xd;
+      &quot;fullUrl&quot;: &quot;urn:uuid:9fbf2fb4-b406-43ca-bbe6-c66dedfba9c1&quot;,&#xd;
+      &quot;resource&quot;: {&#xd;
+        &quot;resourceType&quot;: &quot;Location&quot;,&#xd;
+        &quot;id&quot;: &quot;9fbf2fb4-b406-43ca-bbe6-c66dedfba9c1&quot;,&#xd;
+        &quot;meta&quot;: {&#xd;
+          &quot;profile&quot;: [&#xd;
+            &quot;http://hl7.org/fhir/us/core/StructureDefinition/us-core-location&quot;&#xd;
+          ]&#xd;
+        },&#xd;
+        &quot;status&quot;: &quot;active&quot;,&#xd;
+        &quot;name&quot;: &quot;SOUTHCOAST HOSPITAL GROUP, INC&quot;,&#xd;
+        &quot;telecom&quot;: [&#xd;
+          {&#xd;
+            &quot;system&quot;: &quot;phone&quot;,&#xd;
+            &quot;value&quot;: &quot;5086793131&quot;&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;address&quot;: {&#xd;
+          &quot;line&quot;: [&#xd;
+            &quot;363 HIGHLAND AVENUE&quot;&#xd;
+          ],&#xd;
+          &quot;city&quot;: &quot;FALL RIVER&quot;,&#xd;
+          &quot;state&quot;: &quot;MA&quot;,&#xd;
+          &quot;postalCode&quot;: &quot;02720&quot;,&#xd;
+          &quot;country&quot;: &quot;US&quot;&#xd;
+        },&#xd;
+        &quot;position&quot;: {&#xd;
+          &quot;longitude&quot;: -71.094162,&#xd;
+          &quot;latitude&quot;: 41.725351&#xd;
+        },&#xd;
+        &quot;managingOrganization&quot;: {&#xd;
+          &quot;reference&quot;: &quot;urn:uuid:23834663-ed53-3da9-b330-d6e1ecb8428e&quot;,&#xd;
+          &quot;display&quot;: &quot;SOUTHCOAST HOSPITAL GROUP, INC&quot;&#xd;
+        }&#xd;
+      },&#xd;
+      &quot;request&quot;: {&#xd;
+        &quot;method&quot;: &quot;POST&quot;,&#xd;
+        &quot;url&quot;: &quot;Location&quot;&#xd;
+      }&#xd;
+    },&#xd;
+    {&#xd;
+      &quot;fullUrl&quot;: &quot;urn:uuid:23834663-ed53-3da9-b330-d6e1ecb8428e&quot;,&#xd;
+      &quot;resource&quot;: {&#xd;
+        &quot;resourceType&quot;: &quot;Organization&quot;,&#xd;
+        &quot;id&quot;: &quot;23834663-ed53-3da9-b330-d6e1ecb8428e&quot;,&#xd;
+        &quot;meta&quot;: {&#xd;
+          &quot;profile&quot;: [&#xd;
+            &quot;http://hl7.org/fhir/us/core/StructureDefinition/us-core-organization&quot;&#xd;
+          ]&#xd;
+        },&#xd;
+        &quot;extension&quot;: [&#xd;
+          {&#xd;
+            &quot;url&quot;: &quot;http://synthetichealth.github.io/synthea/utilization-encounters-extension&quot;,&#xd;
+            &quot;valueInteger&quot;: 38&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;url&quot;: &quot;http://synthetichealth.github.io/synthea/utilization-procedures-extension&quot;,&#xd;
+            &quot;valueInteger&quot;: 0&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;url&quot;: &quot;http://synthetichealth.github.io/synthea/utilization-labs-extension&quot;,&#xd;
+            &quot;valueInteger&quot;: 0&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;url&quot;: &quot;http://synthetichealth.github.io/synthea/utilization-prescriptions-extension&quot;,&#xd;
+            &quot;valueInteger&quot;: 0&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;identifier&quot;: [&#xd;
+          {&#xd;
+            &quot;system&quot;: &quot;https://github.com/synthetichealth/synthea&quot;,&#xd;
+            &quot;value&quot;: &quot;23834663-ed53-3da9-b330-d6e1ecb8428e&quot;&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;active&quot;: true,&#xd;
+        &quot;type&quot;: [&#xd;
+          {&#xd;
+            &quot;coding&quot;: [&#xd;
+              {&#xd;
+                &quot;system&quot;: &quot;http://terminology.hl7.org/CodeSystem/organization-type&quot;,&#xd;
+                &quot;code&quot;: &quot;prov&quot;,&#xd;
+                &quot;display&quot;: &quot;Healthcare Provider&quot;&#xd;
+              }&#xd;
+            ],&#xd;
+            &quot;text&quot;: &quot;Healthcare Provider&quot;&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;name&quot;: &quot;SOUTHCOAST HOSPITAL GROUP, INC&quot;,&#xd;
+        &quot;telecom&quot;: [&#xd;
+          {&#xd;
+            &quot;system&quot;: &quot;phone&quot;,&#xd;
+            &quot;value&quot;: &quot;5086793131&quot;&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;address&quot;: [&#xd;
+          {&#xd;
+            &quot;line&quot;: [&#xd;
+              &quot;363 HIGHLAND AVENUE&quot;&#xd;
+            ],&#xd;
+            &quot;city&quot;: &quot;FALL RIVER&quot;,&#xd;
+            &quot;state&quot;: &quot;MA&quot;,&#xd;
+            &quot;postalCode&quot;: &quot;02720&quot;,&#xd;
+            &quot;country&quot;: &quot;US&quot;&#xd;
+          }&#xd;
+        ]&#xd;
+      },&#xd;
+      &quot;request&quot;: {&#xd;
+        &quot;method&quot;: &quot;POST&quot;,&#xd;
+        &quot;url&quot;: &quot;Organization&quot;&#xd;
+      }&#xd;
+    },&#xd;
+    {&#xd;
+      &quot;fullUrl&quot;: &quot;urn:uuid:f1821d7e-7da2-48d7-9f48-ad8a7d97fb36&quot;,&#xd;
+      &quot;resource&quot;: {&#xd;
+        &quot;resourceType&quot;: &quot;Location&quot;,&#xd;
+        &quot;id&quot;: &quot;f1821d7e-7da2-48d7-9f48-ad8a7d97fb36&quot;,&#xd;
+        &quot;meta&quot;: {&#xd;
+          &quot;profile&quot;: [&#xd;
+            &quot;http://hl7.org/fhir/us/core/StructureDefinition/us-core-location&quot;&#xd;
+          ]&#xd;
+        },&#xd;
+        &quot;status&quot;: &quot;active&quot;,&#xd;
+        &quot;name&quot;: &quot;OLIVIER GROUP PC&quot;,&#xd;
+        &quot;telecom&quot;: [&#xd;
+          {&#xd;
+            &quot;system&quot;: &quot;phone&quot;,&#xd;
+            &quot;value&quot;: &quot;508-993-3000&quot;&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;address&quot;: {&#xd;
+          &quot;line&quot;: [&#xd;
+            &quot;92 FAUNCE CORNER RD&quot;&#xd;
+          ],&#xd;
+          &quot;city&quot;: &quot;DARTMOUTH&quot;,&#xd;
+          &quot;state&quot;: &quot;MA&quot;,&#xd;
+          &quot;postalCode&quot;: &quot;02747-1262&quot;,&#xd;
+          &quot;country&quot;: &quot;US&quot;&#xd;
+        },&#xd;
+        &quot;position&quot;: {&#xd;
+          &quot;longitude&quot;: -70.958229,&#xd;
+          &quot;latitude&quot;: 41.56651&#xd;
+        },&#xd;
+        &quot;managingOrganization&quot;: {&#xd;
+          &quot;reference&quot;: &quot;urn:uuid:8979fc79-bab8-34ba-b7a5-016443c958c5&quot;,&#xd;
+          &quot;display&quot;: &quot;OLIVIER GROUP PC&quot;&#xd;
+        }&#xd;
+      },&#xd;
+      &quot;request&quot;: {&#xd;
+        &quot;method&quot;: &quot;POST&quot;,&#xd;
+        &quot;url&quot;: &quot;Location&quot;&#xd;
+      }&#xd;
+    },&#xd;
+    {&#xd;
+      &quot;fullUrl&quot;: &quot;urn:uuid:8979fc79-bab8-34ba-b7a5-016443c958c5&quot;,&#xd;
+      &quot;resource&quot;: {&#xd;
+        &quot;resourceType&quot;: &quot;Organization&quot;,&#xd;
+        &quot;id&quot;: &quot;8979fc79-bab8-34ba-b7a5-016443c958c5&quot;,&#xd;
+        &quot;meta&quot;: {&#xd;
+          &quot;profile&quot;: [&#xd;
+            &quot;http://hl7.org/fhir/us/core/StructureDefinition/us-core-organization&quot;&#xd;
+          ]&#xd;
+        },&#xd;
+        &quot;extension&quot;: [&#xd;
+          {&#xd;
+            &quot;url&quot;: &quot;http://synthetichealth.github.io/synthea/utilization-encounters-extension&quot;,&#xd;
+            &quot;valueInteger&quot;: 35&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;url&quot;: &quot;http://synthetichealth.github.io/synthea/utilization-procedures-extension&quot;,&#xd;
+            &quot;valueInteger&quot;: 146&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;url&quot;: &quot;http://synthetichealth.github.io/synthea/utilization-labs-extension&quot;,&#xd;
+            &quot;valueInteger&quot;: 12&#xd;
+          },&#xd;
+          {&#xd;
+            &quot;url&quot;: &quot;http://synthetichealth.github.io/synthea/utilization-prescriptions-extension&quot;,&#xd;
+            &quot;valueInteger&quot;: 19&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;identifier&quot;: [&#xd;
+          {&#xd;
+            &quot;system&quot;: &quot;https://github.com/synthetichealth/synthea&quot;,&#xd;
+            &quot;value&quot;: &quot;8979fc79-bab8-34ba-b7a5-016443c958c5&quot;&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;active&quot;: true,&#xd;
+        &quot;type&quot;: [&#xd;
+          {&#xd;
+            &quot;coding&quot;: [&#xd;
+              {&#xd;
+                &quot;system&quot;: &quot;http://terminology.hl7.org/CodeSystem/organization-type&quot;,&#xd;
+                &quot;code&quot;: &quot;prov&quot;,&#xd;
+                &quot;display&quot;: &quot;Healthcare Provider&quot;&#xd;
+              }&#xd;
+            ],&#xd;
+            &quot;text&quot;: &quot;Healthcare Provider&quot;&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;name&quot;: &quot;OLIVIER GROUP PC&quot;,&#xd;
+        &quot;telecom&quot;: [&#xd;
+          {&#xd;
+            &quot;system&quot;: &quot;phone&quot;,&#xd;
+            &quot;value&quot;: &quot;508-993-3000&quot;&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;address&quot;: [&#xd;
+          {&#xd;
+            &quot;line&quot;: [&#xd;
+              &quot;92 FAUNCE CORNER RD&quot;&#xd;
+            ],&#xd;
+            &quot;city&quot;: &quot;DARTMOUTH&quot;,&#xd;
+            &quot;state&quot;: &quot;MA&quot;,&#xd;
+            &quot;postalCode&quot;: &quot;02747-1262&quot;,&#xd;
+            &quot;country&quot;: &quot;US&quot;&#xd;
+          }&#xd;
+        ]&#xd;
+      },&#xd;
+      &quot;request&quot;: {&#xd;
+        &quot;method&quot;: &quot;POST&quot;,&#xd;
+        &quot;url&quot;: &quot;Organization&quot;&#xd;
+      }&#xd;
+    }&#xd;
+  ]&#xd;
+}&#xd;
+</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">hapi.fhir.org</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">http</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/baseR4</stringProp>
+            <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </ConfigTestElement>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Practitioner - HAPI" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path"></stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+  &quot;resourceType&quot;: &quot;Bundle&quot;,&#xd;
+  &quot;type&quot;: &quot;transaction&quot;,&#xd;
+  &quot;entry&quot;: [&#xd;
+    {&#xd;
+      &quot;fullUrl&quot;: &quot;urn:uuid:0000016e-ed71-bd01-0000-000000000064&quot;,&#xd;
+      &quot;resource&quot;: {&#xd;
+        &quot;resourceType&quot;: &quot;Practitioner&quot;,&#xd;
+        &quot;id&quot;: &quot;0000016e-ed71-bd01-0000-000000000064&quot;,&#xd;
+        &quot;meta&quot;: {&#xd;
+          &quot;profile&quot;: [&#xd;
+            &quot;http://hl7.org/fhir/us/core/StructureDefinition/us-core-practitioner&quot;&#xd;
+          ]&#xd;
+        },&#xd;
+        &quot;extension&quot;: [&#xd;
+          {&#xd;
+            &quot;url&quot;: &quot;http://synthetichealth.github.io/synthea/utilization-encounters-extension&quot;,&#xd;
+            &quot;valueInteger&quot;: 24&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;identifier&quot;: [&#xd;
+          {&#xd;
+            &quot;system&quot;: &quot;http://hl7.org/fhir/sid/us-npi&quot;,&#xd;
+            &quot;value&quot;: &quot;100&quot;&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;active&quot;: true,&#xd;
+        &quot;name&quot;: [&#xd;
+          {&#xd;
+            &quot;family&quot;: &quot;Conn188&quot;,&#xd;
+            &quot;given&quot;: [&#xd;
+              &quot;Whitney250&quot;&#xd;
+            ],&#xd;
+            &quot;prefix&quot;: [&#xd;
+              &quot;Dr.&quot;&#xd;
+            ]&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;telecom&quot;: [&#xd;
+          {&#xd;
+            &quot;extension&quot;: [&#xd;
+              {&#xd;
+                &quot;url&quot;: &quot;http://hl7.org/fhir/us/core/StructureDefinition/us-core-direct&quot;,&#xd;
+                &quot;valueBoolean&quot;: true&#xd;
+              }&#xd;
+            ],&#xd;
+            &quot;system&quot;: &quot;email&quot;,&#xd;
+            &quot;value&quot;: &quot;Whitney250.Conn188@example.com&quot;,&#xd;
+            &quot;use&quot;: &quot;work&quot;&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;address&quot;: [&#xd;
+          {&#xd;
+            &quot;line&quot;: [&#xd;
+              &quot;795 MIDDLE STREET&quot;&#xd;
+            ],&#xd;
+            &quot;city&quot;: &quot;FALL RIVER&quot;,&#xd;
+            &quot;state&quot;: &quot;MA&quot;,&#xd;
+            &quot;postalCode&quot;: &quot;02721&quot;,&#xd;
+            &quot;country&quot;: &quot;US&quot;&#xd;
+          }&#xd;
+        ],&#xd;
+        &quot;gender&quot;: &quot;male&quot;&#xd;
+      },&#xd;
+      &quot;request&quot;: {&#xd;
+        &quot;method&quot;: &quot;POST&quot;,&#xd;
+        &quot;url&quot;: &quot;Practitioner&quot;&#xd;
+      }&#xd;
+    }&#xd;
+  ]&#xd;
+}&#xd;
+</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">hapi.fhir.org</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">http</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/baseR4</stringProp>
+            <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </ConfigTestElement>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Patient  - HAPI" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">&#xd;
+</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path"></stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">${__FileToString(${__eval(${json_file})},,)}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">hapi.fhir.org</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">http</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/baseR4</stringProp>
+            <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </ConfigTestElement>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Delete Patient  - HAPI" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="identifier" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">${id}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">identifier</stringProp>
+              </elementProp>
+              <elementProp name="_cascade" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">delete</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">_cascade</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">hapi.fhir.org</stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/baseR4/Patient</stringProp>
+          <stringProp name="HTTPSampler.method">DELETE</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Delete Practitioner - HAPI" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="identifier" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">0000016e-ed71-bd01-0000-000000000064</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">identifier</stringProp>
+              </elementProp>
+              <elementProp name="_cascade" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">delete</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">_cascade</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">hapi.fhir.org</stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/baseR4/Practitioner</stringProp>
+          <stringProp name="HTTPSampler.method">DELETE</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Delete institution - HAPI" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="identifier" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">ecc51621-0af3-3b35-ac3e-8b1e34022e92</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">identifier</stringProp>
+              </elementProp>
+              <elementProp name="_cascade" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">delete</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">_cascade</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">hapi.fhir.org</stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/baseR4/Organization</stringProp>
+          <stringProp name="HTTPSampler.method">DELETE</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+        <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="View Results in Table" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename">C:\dev\testing\create_delete_plot.csv</stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <kg.apc.jmeter.vizualizers.CorrectedResultCollector guiclass="kg.apc.jmeter.vizualizers.ResponseTimesDistributionGui" testclass="kg.apc.jmeter.vizualizers.CorrectedResultCollector" testname="jp@gc - Response Times Distribution" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename">C:\dev\testing\create_delete_plot.csv</stringProp>
+          <longProp name="interval_grouping">500</longProp>
+          <boolProp name="graph_aggregated">false</boolProp>
+          <stringProp name="include_sample_labels"></stringProp>
+          <stringProp name="exclude_sample_labels"></stringProp>
+          <stringProp name="start_offset"></stringProp>
+          <stringProp name="end_offset"></stringProp>
+          <boolProp name="include_checkbox_state">false</boolProp>
+          <boolProp name="exclude_checkbox_state">false</boolProp>
+        </kg.apc.jmeter.vizualizers.CorrectedResultCollector>
+        <hashTree/>
+        <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename">C:\dev\testing\create_delete_plot.csv</stringProp>
+          <boolProp name="useGroupName">true</boolProp>
+        </ResultCollector>
+        <hashTree/>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Search Patient" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">4</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">100</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration">5</stringProp>
+        <stringProp name="ThreadGroup.delay">1</stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+          <collectionProp name="HeaderManager.headers">
+            <elementProp name="" elementType="Header">
+              <stringProp name="Header.name">Content-Type</stringProp>
+              <stringProp name="Header.value">application/fhir+json</stringProp>
+            </elementProp>
+          </collectionProp>
+        </HeaderManager>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Patient By ID - Azure" enabled="false">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">hapi-synthea.azurewebsites.net</stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/hapi-fhir-jpaserver/fhir/Patient/${id}</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+            <stringProp name="filename">C:/dev/testing/azure_patients.csv</stringProp>
+            <stringProp name="fileEncoding"></stringProp>
+            <stringProp name="variableNames">id,given,family</stringProp>
+            <boolProp name="ignoreFirstLine">true</boolProp>
+            <stringProp name="delimiter">,</stringProp>
+            <boolProp name="quotedData">true</boolProp>
+            <boolProp name="recycle">true</boolProp>
+            <boolProp name="stopThread">false</boolProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
+          </CSVDataSet>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Patient &amp; Encounters - Azure" enabled="false">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">hapi-synthea.azurewebsites.net</stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/hapi-fhir-jpaserver/fhir/Patient/${id}?_revinclude=Encounter:subject</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+            <stringProp name="filename">C:/dev/testing/azure_patients.csv</stringProp>
+            <stringProp name="fileEncoding"></stringProp>
+            <stringProp name="variableNames">id,given,family</stringProp>
+            <boolProp name="ignoreFirstLine">true</boolProp>
+            <stringProp name="delimiter">,</stringProp>
+            <boolProp name="quotedData">true</boolProp>
+            <boolProp name="recycle">true</boolProp>
+            <boolProp name="stopThread">false</boolProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
+          </CSVDataSet>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Patient by Name - Azure" enabled="false">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="given" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">${given}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">given</stringProp>
+              </elementProp>
+              <elementProp name="family" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">${family}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">family</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">hapi-synthea.azurewebsites.net</stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/hapi-fhir-jpaserver/fhir/Patient</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">true</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+            <stringProp name="filename">C:/dev/testing/azure_patients.csv</stringProp>
+            <stringProp name="fileEncoding"></stringProp>
+            <stringProp name="variableNames">id,given,family</stringProp>
+            <boolProp name="ignoreFirstLine">true</boolProp>
+            <stringProp name="delimiter">,</stringProp>
+            <boolProp name="quotedData">true</boolProp>
+            <boolProp name="recycle">true</boolProp>
+            <boolProp name="stopThread">false</boolProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
+          </CSVDataSet>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Patient By ID - HAPI" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">hapi.fhir.org</stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/baseDstu3/Patient/${id}</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+            <stringProp name="filename">C:/dev/testing/hapi_patients.csv</stringProp>
+            <stringProp name="fileEncoding"></stringProp>
+            <stringProp name="variableNames">id,given,family</stringProp>
+            <boolProp name="ignoreFirstLine">true</boolProp>
+            <stringProp name="delimiter">,</stringProp>
+            <boolProp name="quotedData">true</boolProp>
+            <boolProp name="recycle">true</boolProp>
+            <boolProp name="stopThread">false</boolProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
+          </CSVDataSet>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Patient &amp; Encounters - HAPI" enabled="false">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">hapi.fhir.org</stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/baseDstu3/Patient/${id}?_revinclude=Encounter:subject</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+            <stringProp name="filename">C:/dev/testing/hapi_patients.csv</stringProp>
+            <stringProp name="fileEncoding"></stringProp>
+            <stringProp name="variableNames">id,given,family</stringProp>
+            <boolProp name="ignoreFirstLine">true</boolProp>
+            <stringProp name="delimiter">,</stringProp>
+            <boolProp name="quotedData">true</boolProp>
+            <boolProp name="recycle">true</boolProp>
+            <boolProp name="stopThread">false</boolProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
+          </CSVDataSet>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Patient by Name - HAPI" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="given" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">${given}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">given</stringProp>
+              </elementProp>
+              <elementProp name="family" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">${family}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">family</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">hapi.fhir.org</stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/baseDstu3/Patient</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">true</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+            <stringProp name="filename">C:/dev/testing/hapi_patients.csv</stringProp>
+            <stringProp name="fileEncoding"></stringProp>
+            <stringProp name="variableNames">id,given,family</stringProp>
+            <boolProp name="ignoreFirstLine">true</boolProp>
+            <stringProp name="delimiter">,</stringProp>
+            <boolProp name="quotedData">true</boolProp>
+            <boolProp name="recycle">true</boolProp>
+            <boolProp name="stopThread">false</boolProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
+          </CSVDataSet>
+          <hashTree/>
+        </hashTree>
+        <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="View Results in Table" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename">C:\dev\testing\search_agg2.csv</stringProp>
+          <boolProp name="useGroupName">true</boolProp>
+        </ResultCollector>
+        <hashTree/>
+        <kg.apc.jmeter.vizualizers.CorrectedResultCollector guiclass="kg.apc.jmeter.vizualizers.ResponseTimesDistributionGui" testclass="kg.apc.jmeter.vizualizers.CorrectedResultCollector" testname="jp@gc - Response Times Distribution" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename">C:\dev\testing\seach_plot.csv</stringProp>
+          <longProp name="interval_grouping">100</longProp>
+          <boolProp name="graph_aggregated">false</boolProp>
+          <stringProp name="include_sample_labels"></stringProp>
+          <stringProp name="exclude_sample_labels"></stringProp>
+          <stringProp name="start_offset"></stringProp>
+          <stringProp name="end_offset"></stringProp>
+          <boolProp name="include_checkbox_state">false</boolProp>
+          <boolProp name="exclude_checkbox_state">false</boolProp>
+        </kg.apc.jmeter.vizualizers.CorrectedResultCollector>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
